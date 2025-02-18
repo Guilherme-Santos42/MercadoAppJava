@@ -32,7 +32,7 @@
 <img src="https://github.com/user-attachments/assets/7973e75d-5357-46de-90d6-9572baf03ff2">
 <h2> Estoque baixo</h2>
 <h3>Mostra todos os itens com menos de 10 em quantidade</h3>
-<img src="https://github.com/user-attachments/assets/832f5bca-b9b9-4335-bd1f-2514d79512ee">
+<img src="https://github.com/user-attachments/assets/cfa5cdd6-9ae1-4683-9dda-3d6adec1befc">
 <h2> Relatorio </h2>
 <h3> Ao acessar é necessário uma senha:</h3>
 <img src="https://github.com/user-attachments/assets/865fae52-b9b0-4977-a632-4b3acc6079f3">
