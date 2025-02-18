@@ -22,14 +22,15 @@
 <h3> Ao acessar é necessário uma senha:</h3>
 <img src="https://github.com/user-attachments/assets/865fae52-b9b0-4977-a632-4b3acc6079f3">
 <h2> Os produtos são listados, aquele que for selecionado será o item a ser alterado, posteriormente o campo recebe o valor atual e a alteração pode ser realizada</h2>
-<img src="https://github.com/user-attachments/assets/0fe32881-97e5-492d-8c9e-3bcf3faada5d">
+<img src="https://github.com/user-attachments/assets/f692bb1f-17e8-4302-82e1-94cbcd44e95f">
+
 <h2> Após clicar em um item: </h2>
-<img src="https://github.com/user-attachments/assets/3cf0fd59-66e0-48bf-98c3-5e2e7489853d">  
+<img src="https://github.com/user-attachments/assets/0fe32881-97e5-492d-8c9e-3bcf3faada5d">
 <h2> Descartar produtos </h2>
 <h3> Ao acessar é necessário uma senha:</h3>
 <img src="https://github.com/user-attachments/assets/865fae52-b9b0-4977-a632-4b3acc6079f3">
 <h3> Essa operação serve para produtos que estragaram, toda operação feita aqui é salva na planilha registros</h3>
-<img src="https://github.com/user-attachments/assets/7973e75d-5357-46de-90d6-9572baf03ff2">
+<img src="https://github.com/user-attachments/assets/3cf0fd59-66e0-48bf-98c3-5e2e7489853d"> 
 <h2> Estoque baixo</h2>
 <h3>Mostra todos os itens com menos de 10 em quantidade</h3>
 <img src="https://github.com/user-attachments/assets/cfa5cdd6-9ae1-4683-9dda-3d6adec1befc">
