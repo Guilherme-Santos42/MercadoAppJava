@@ -13,7 +13,7 @@
 <h3> E ao clicar ele mostra as informações cadastradas disponíveis para alteração, caso queira cadastrar um novo produto o nome deve ser diferente do cadastrado</h3>
 <img src="https://github.com/user-attachments/assets/7deef825-ef14-45f7-9949-0a282be3d326">
 <h2> Listar produtos cadastrados</h2>
-<img src="https://github.com/user-attachments/assets/afa348f4-87cf-4f76-b6ee-4b342ab87c11">
+<img src="https://github.com/user-attachments/assets/3dc2cac7-3b50-4887-86be-12e31da4dde5">
 <h2> Mercado</h2>
 <h2> Qualquer item exibido ao ser clicado tem o seu valor adicionado a soma total que é mostrada na tela, a forma de pagamento é obrigatória, todas essas informações serão salvas na planilha registros após o botão finalizar venda ser clicado</h2>
 <img src="https://github.com/user-attachments/assets/5204799c-7fc7-4322-8f1e-1b27715d7802">
