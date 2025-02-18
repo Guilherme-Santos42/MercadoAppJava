@@ -8,9 +8,9 @@
 <img src="https://github.com/user-attachments/assets/865fae52-b9b0-4977-a632-4b3acc6079f3">
 <img src="https://github.com/user-attachments/assets/25fc3f97-a819-41bd-a883-97ee2edc9543">
 <h3> Ao digitar o nome de um produto já existente ele fornece sugestão para alterar o produto</h3>
-<img src="https://github.com/user-attachments/assets/438440b6-f44f-4be8-8f7e-5ec35068eafb)">
+<img src="https://github.com/user-attachments/assets/438440b6-f44f-4be8-8f7e-5ec35068eafb">
 <h3> E ao clicar ele mostra as informações cadastradas disponíveis para alteração, caso queira cadastrar um novo produto o nome deve ser diferente do cadastrado</h3>
-<img src="https://github.com/user-attachments/assets/c573d5ab-f0c4-4a29-99bc-16fd2e92e294">
+<img src="https://github.com/user-attachments/assets/7deef825-ef14-45f7-9949-0a282be3d326">
 <h2> Listar produtos cadastrados</h2>
 <img src="https://github.com/user-attachments/assets/afa348f4-87cf-4f76-b6ee-4b342ab87c11">
 <h2> Mercado</h2>
