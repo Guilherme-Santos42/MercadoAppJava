@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">estoquevendas</string>
+
+        <!-- Outras strings que você possa ter -->
+
+        <string name="drawer_open">Abrir menu</string>
+        <string name="drawer_close">Fechar menu</string>
+
+</resources>

@@ -1,0 +1,19 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Estoquevendas" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">#07A0C3</item>
+        <item name="colorPrimaryDark">#303F9F</item>
+        <item name="colorAccent">#FF4081</item>
+
+        <!-- Definindo o estilo dos botões -->
+        <item name="buttonStyle">@style/ButtonStyle</item>
+    </style>
+
+    <style name="Theme.Estoquevendas" parent="Base.Theme.Estoquevendas" />
+    <style name="ButtonStyle">
+        <item name="android:background">@drawable/button_background</item> <!-- Fundo customizado -->
+        <item name="android:textColor">#000000</item> <!-- Cor do texto -->
+        <item name="android:textSize">18sp</item> <!-- Tamanho do texto -->
+        <item name="android:padding">12dp</item> <!-- Espaçamento interno -->
+    </style>
+</resources>

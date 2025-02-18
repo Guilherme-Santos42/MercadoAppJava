@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EditText para Nome do Produto -->
+    <AutoCompleteTextView
+        android:id="@+id/edtNomeProduto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nome do Produto"
+        android:textSize="18sp"
+        android:inputType="text"
+        android:completionThreshold="1"/>
+
+
+    <!-- EditText para Quantidade -->
+    <EditText
+        android:id="@+id/edtQuantidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Quantidade"
+        android:paddingTop="30dp"
+        android:inputType="number" />
+
+    <!-- EditText para Valor -->
+
+    <!-- Botão para Cadastrar Produto -->
+    <EditText
+        android:id="@+id/edtValor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:hint="Valor"
+        android:paddingTop="30dp"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/btnCadastrarProduto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar Produto" />
+
+    <!-- Botão para Voltar ao Menu -->
+    <Button
+        android:id="@+id/btnVoltarMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Voltar ao Menu" />
+
+</LinearLayout>

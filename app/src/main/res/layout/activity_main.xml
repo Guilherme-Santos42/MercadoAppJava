@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- O conteúdo principal da sua aplicação (apenas a Toolbar) -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="250dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/untitled"> </ImageView>
+
+        <!-- Coloque aqui sua Toolbar, ela deve ser o topo da tela -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/laranja"
+            android:titleTextColor="@android:color/holo_orange_dark"
+            android:layout_alignParentTop="true"
+            />
+    </RelativeLayout>
+
+    <!-- Sidebar (Navegação lateral) -->
+    <LinearLayout
+        android:id="@+id/side_navigation"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:padding="16dp"
+        android:layout_gravity="start">
+
+        <!-- Botão com ícone à esquerda (Ícone do Material Design) -->
+        <Button
+            android:id="@+id/btnCadastrarProdutoSidebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Cadastrar Produto"
+            android:textSize="18sp"
+            android:drawableLeft="@drawable/baseline_add_white_18"
+            />
+
+        <!-- Botão com ícone à esquerda (Ícone do Material Design) -->
+        <Button
+            android:id="@+id/btnListaProdutoSidebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Lista de Produtos"
+            android:textSize="18sp"
+            android:drawableLeft="@drawable/baseline_list_white_18"
+            />
+
+        <!-- Botão com ícone à esquerda (Ícone do Material Design) -->
+        <Button
+            android:id="@+id/btnMercadoSidebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mercado"
+            android:textSize="18sp"
+            android:drawableLeft="@drawable/baseline_store_white_18"
+            android:layout_marginBottom="10dp"/>
+
+        <!-- Botão com ícone à esquerda (Ícone do Material Design) -->
+        <Button
+            android:id="@+id/btnAtualizarPrecoSidebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Editar Preços"
+            android:textSize="18sp"
+            android:drawableLeft="@drawable/baseline_edit_white_18"
+            android:layout_marginBottom="10dp"/>
+
+        <!-- Botão com ícone à esquerda (Ícone do Material Design) -->
+        <Button
+            android:id="@+id/btnDescarteProdutoSidebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descarte de Produtos"
+            android:textSize="18sp"
+            android:drawableLeft="@drawable/baseline_delete_white_18"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/btnEstoqueBaixo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Estoque Baixo"
+            android:textSize="18sp"
+            android:drawableLeft="@drawable/baseline_assignment_white_18"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/btnRegistro_lista"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registro do Dia"
+            android:textSize="18sp"
+            android:drawableLeft="@drawable/baseline_timeline_white_18"
+            android:layout_marginBottom="10dp"/>
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

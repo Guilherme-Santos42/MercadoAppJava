@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- ListView para exibir os registros -->
+    <ListView
+        android:id="@+id/listViewRegistros"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Botão para escolher a data específica -->
+    <Button
+        android:id="@+id/btnEscolherData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Escolher Data"
+        android:layout_marginTop="8dp" />
+
+    <!-- TextView para mostrar a data selecionada -->
+    <TextView
+        android:id="@+id/tvDataSelecionada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Data: Nenhuma"
+        android:layout_marginTop="4dp"
+        android:textSize="16sp"
+        android:gravity="center" />
+
+    <!-- TextView para exibir o total bruto -->
+    <TextView
+        android:id="@+id/tvTotalBruto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Valor Total Bruto: R$ 0.00"
+        android:textSize="16sp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:background="#e0e0e0"/>
+
+    <!-- Botão de retornar para a MainActivity -->
+    <Button
+        android:id="@+id/btnRetornarMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voltar ao inicio"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>

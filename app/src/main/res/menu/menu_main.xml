@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_cadastrar_produto"
+        android:title="Cadastrar Produto"/>
+
+    <item
+        android:id="@+id/nav_lista_produtos"
+        android:title="Lista de Produtos"/>
+
+    <item
+        android:id="@+id/nav_mercado"
+        android:title="Mercado"/>
+
+    <item
+        android:id="@+id/nav_atualizar_preco"
+        android:title="Editar Preços"/>
+
+    <item
+        android:id="@+id/nav_descarte_produto"
+        android:title="Descarte de Produtos"/>
+
+</menu>

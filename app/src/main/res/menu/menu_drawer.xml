@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_cadastrar_produto"
+        android:title="Cadastrar Produto"
+        android:icon="@android:drawable/ic_menu_add" />
+
+    <item
+        android:id="@+id/nav_lista_produto"
+        android:title="Lista de Produtos"
+        android:icon="@android:drawable/ic_menu_view" />
+
+    <item
+        android:id="@+id/nav_mercado"
+        android:title="Mercado"
+        android:icon="@android:drawable/ic_menu_edit" />
+
+    <item
+        android:id="@+id/nav_atualizar_preco"
+        android:title="Editar Preços"
+        android:icon="@android:drawable/ic_menu_edit" />
+
+    <item
+        android:id="@+id/nav_descarte_produto"
+        android:title="Descarte de Produtos"
+        android:icon="@android:drawable/ic_menu_delete" />
+</menu>

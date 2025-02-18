@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Spinner para selecionar o produto -->
+    <Spinner
+        android:id="@+id/spinnerProdutosDescarte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown" />
+
+    <!-- Campo para inserir a quantidade a ser descartada -->
+    <EditText
+        android:id="@+id/edtQuantidadeDescarte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Quantidade para descartar"
+        android:inputType="number" />
+
+    <!-- Botão para descartar o produto -->
+    <Button
+        android:id="@+id/btnDescarteProduto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descartar"
+        android:layout_gravity="center" />
+
+    <!-- Botão para voltar -->
+    <Button
+        android:id="@+id/btnVoltar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voltar"
+        android:layout_gravity="center" />
+
+</LinearLayout>

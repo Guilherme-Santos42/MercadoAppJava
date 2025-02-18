@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ListView
+        android:id="@+id/listViewProdutos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:choiceMode="singleChoice" />
+
+    <EditText
+        android:id="@+id/edtNovoPreco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Novo Preço"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/btnAtualizarPreco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Atualizar Preço" />
+
+    <Button
+        android:id="@+id/btnVoltarMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Voltar ao Menu" />
+</LinearLayout>
