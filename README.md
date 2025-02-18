@@ -40,6 +40,6 @@
 <h3> Uma data é selecionada através de um botão, logo todos os registros de tal dia aparecem e o valor total bruto de entrada é mostrado</h3>
 <img src="https://github.com/user-attachments/assets/2d67ea92-70bb-4c98-9978-9e50d4aea0a8">
 
-<h1> Todos as operações são salvas na planilha registros, os produtos são salvos na planilha produtos que ficam em data>com.example.estoquevendas</h1>
+<h1> Todas as operações são salvas na planilha registros, os produtos são salvos na planilha produtos que ficam em data>com.example.estoquevendas</h1>
 
 
