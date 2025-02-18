@@ -22,7 +22,7 @@
 <h3> Ao acessar é necessário uma senha:</h3>
 <img src="https://github.com/user-attachments/assets/865fae52-b9b0-4977-a632-4b3acc6079f3">
 <h2> Os produtos são listados, aquele que for selecionado será o item a ser alterado, posteriormente o campo recebe o valor atual e a alteração pode ser realizada</h2>
-<img src="https://github.com/user-attachments/assets/1b79a6da-05a7-4cd3-932f-189bd770b933">
+<img src="https://github.com/user-attachments/assets/1d77f9fb-a671-4082-8092-9bde939f41ab">
 
 <h2> Após clicar em um item: </h2>
 <img src="https://github.com/user-attachments/assets/0fe32881-97e5-492d-8c9e-3bcf3faada5d">
