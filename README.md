@@ -17,11 +17,10 @@
 <h2> Mercado</h2>
 <h2> Qualquer item exibido ao ser clicado tem o seu valor adicionado a soma total que é mostrada na tela, a forma de pagamento é obrigatória, todas essas informações serão salvas na planilha registros após o botão finalizar venda ser clicado</h2>
 <img src="https://github.com/user-attachments/assets/5204799c-7fc7-4322-8f1e-1b27715d7802">
-<img src="https://github.com/user-attachments/assets/248e8fd9-e630-4179-90f7-54b6ab4c41f9">
+<img src="https://github.com/user-attachments/assets/e808785c-aede-4d73-80a6-c2db9824e0a1">
 <h2> Editar Preços</h2>
 <h3> Ao acessar é necessário uma senha:</h3>
-<img src="https://github.com/user-attachments/assets/865fae52-b9b0-4977-a632-4b3acc6079f3
-">
+<img src="https://github.com/user-attachments/assets/865fae52-b9b0-4977-a632-4b3acc6079f3">
 <h2> Os produtos são listados, aquele que for selecionado será o item a ser alterado, posteriormente o campo recebe o valor atual e a alteração pode ser realizada</h2>
 <img src="https://github.com/user-attachments/assets/0fe32881-97e5-492d-8c9e-3bcf3faada5d">
 <h2> Após clicar em um item: </h2>
