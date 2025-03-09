@@ -36,6 +36,10 @@ public class MercadoActivity extends AppCompatActivity {
     double totalVenda = 0.0;
     List<Produto> produtosSelecionados = new ArrayList<>();
 
+    // Variáveis para controlar as instâncias das tarefas
+    private CarregarProdutosTask carregarProdutosTask;
+    private RegistrarVendaTask registrarVendaTask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,31 +61,176 @@ public class MercadoActivity extends AppCompatActivity {
         btnFinalizarVenda.setOnClickListener(v -> finalizarVenda());
         btnVoltarMenu.setOnClickListener(v -> finish());
 
-        // Chamar o AsyncTask para carregar produtos após inicializar componentes
-        new CarregarProdutosTask().execute();
+        // Carregar produtos
+        carregarProdutos();
     }
 
-    // Método para carregar produtos da planilha em segundo plano
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Cancelar tarefas em execução ao destruir a Activity
+        if (carregarProdutosTask != null && carregarProdutosTask.getStatus() == AsyncTask.Status.RUNNING) {
+            carregarProdutosTask.cancel(true);
+        }
+        if (registrarVendaTask != null && registrarVendaTask.getStatus() == AsyncTask.Status.RUNNING) {
+            registrarVendaTask.cancel(true);
+        }
+    }
+
+    // Método para carregar produtos
+    private void carregarProdutos() {
+        if (carregarProdutosTask == null || carregarProdutosTask.getStatus() == AsyncTask.Status.FINISHED) {
+            carregarProdutosTask = new CarregarProdutosTask();
+            carregarProdutosTask.execute();
+        }
+    }
+
+    // Método para finalizar a venda
+    private void finalizarVenda() {
+        if (!checkboxCredito.isChecked() && !checkboxDebito.isChecked() && !checkboxPix.isChecked() && !checkboxDinheiro.isChecked()) {
+            Toast.makeText(this, "Por favor, selecione uma forma de pagamento.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        totalVenda = 0.0;
+        StringBuilder vendaDetalhes = new StringBuilder("Venda finalizada:\n");
+
+        for (Produto p : produtosSelecionados) {
+            if (p.getQuantidade() > 0) {
+                double subtotal = p.getValor() * p.getQuantidade();
+                totalVenda += subtotal;
+                vendaDetalhes.append(p.getNome())
+                        .append(" x")
+                        .append(p.getQuantidade())
+                        .append(" - R$ ")
+                        .append(String.format("%.2f", p.getValor()))
+                        .append(" = R$ ")
+                        .append(String.format("%.2f", subtotal))
+                        .append("\n");
+            }
+        }
+        vendaDetalhes.append("Total: R$ ").append(String.format("%.2f", totalVenda)).append("\n");
+
+        Toast.makeText(this, vendaDetalhes.toString(), Toast.LENGTH_LONG).show();
+
+        // Registrar venda
+        if (registrarVendaTask == null || registrarVendaTask.getStatus() == AsyncTask.Status.FINISHED) {
+            registrarVendaTask = new RegistrarVendaTask();
+            registrarVendaTask.execute();
+        }
+    }
+
+    // Método para atualizar o estoque
+    private void atualizarEstoque() {
+        try {
+            File file = new File(getExternalFilesDir("estoquevendas"), "produtos.xlsx");
+
+            if (!file.exists()) {
+                runOnUiThread(() -> Toast.makeText(MercadoActivity.this, "Arquivo de produtos não encontrado!", Toast.LENGTH_LONG).show());
+                return;
+            }
+
+            FileInputStream fis = new FileInputStream(file);
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+
+            for (Produto produtoVendido : produtosSelecionados) {
+                if (produtoVendido.getQuantidade() > 0) {
+                    for (Row row : sheet) {
+                        if (row.getCell(0) != null && row.getCell(1) != null) {
+                            String nomeProduto = row.getCell(0).getStringCellValue();
+
+                            if (nomeProduto.equals(produtoVendido.getNome())) {
+                                Cell quantidadeCell = row.getCell(1);
+
+                                int quantidadeAtual;
+                                if (quantidadeCell.getCellType() == org.apache.poi.ss.usermodel.CellType.NUMERIC) {
+                                    quantidadeAtual = (int) quantidadeCell.getNumericCellValue();
+                                } else if (quantidadeCell.getCellType() == org.apache.poi.ss.usermodel.CellType.STRING) {
+                                    try {
+                                        quantidadeAtual = Integer.parseInt(quantidadeCell.getStringCellValue().trim());
+                                    } catch (NumberFormatException e) {
+                                        quantidadeAtual = 0;
+                                    }
+                                } else {
+                                    quantidadeAtual = 0;
+                                }
+
+                                int novaQuantidade = quantidadeAtual - produtoVendido.getQuantidade();
+                                row.getCell(1).setCellValue(Math.max(novaQuantidade, 0));
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            fis.close();
+
+            FileOutputStream fos = new FileOutputStream(file);
+            workbook.write(fos);
+            fos.close();
+            workbook.close();
+
+            runOnUiThread(() -> Toast.makeText(MercadoActivity.this, "Estoque atualizado!", Toast.LENGTH_SHORT).show());
+        } catch (IOException e) {
+            e.printStackTrace();
+            runOnUiThread(() -> Toast.makeText(MercadoActivity.this, "Erro ao atualizar o estoque!", Toast.LENGTH_SHORT).show());
+        }
+    }
+
+    // Método para limpar os cliques de produtos
+    private void limparCliques() {
+        for (Produto p : produtosSelecionados) {
+            p.setQuantidade(0);
+        }
+        atualizarTotalVenda();
+    }
+
+    // Método para atualizar o total da venda
+    private void atualizarTotalVenda() {
+        totalVenda = 0.0;
+        for (Produto p : produtosSelecionados) {
+            totalVenda += p.getQuantidade() * p.getValor();
+        }
+        txtTotalVenda.setText("Total: R$ " + String.format("%.2f", totalVenda));
+    }
+
+    // Método para obter as formas de pagamento selecionadas
+    private String obterFormasDePagamentoSelecionadas() {
+        StringBuilder formasPagamento = new StringBuilder();
+        if (checkboxCredito.isChecked()) {
+            formasPagamento.append("Crédito ");
+        }
+        if (checkboxDebito.isChecked()) {
+            formasPagamento.append("Débito ");
+        }
+        if (checkboxPix.isChecked()) {
+            formasPagamento.append("Pix ");
+        }
+        if (checkboxDinheiro.isChecked()) {
+            formasPagamento.append("Dinheiro ");
+        }
+        return formasPagamento.toString().trim();
+    }
+
+    // AsyncTask para carregar produtos
     private class CarregarProdutosTask extends AsyncTask<Void, Void, List<String>> {
         @Override
         protected List<String> doInBackground(Void... voids) {
             List<String> produtos = new ArrayList<>();
             try {
-                // Acessando o diretório privado do aplicativo em android/data/com.example.estoquevendas/files/
                 File file = new File(getExternalFilesDir("estoquevendas"), "produtos.xlsx");
 
-                // Verificando se o arquivo existe no diretório privado
                 if (!file.exists()) {
                     runOnUiThread(() -> Toast.makeText(MercadoActivity.this, "Arquivo de produtos não encontrado!", Toast.LENGTH_LONG).show());
                     return produtos;
                 }
 
-                // Abrindo a planilha XLSX
                 FileInputStream fis = new FileInputStream(file);
                 XSSFWorkbook workbook = new XSSFWorkbook(fis);
                 XSSFSheet sheet = workbook.getSheetAt(0);
 
-                // Processando os dados da planilha
                 for (Row row : sheet) {
                     if (row.getCell(0) != null && row.getCell(2) != null) {
                         String nomeProduto = row.getCell(0).getStringCellValue();
@@ -120,58 +269,17 @@ public class MercadoActivity extends AppCompatActivity {
         }
     }
 
-    // Método para obter o valor do produto
-    private double obterValorProduto(Cell cell) {
-        if (cell.getCellType() == org.apache.poi.ss.usermodel.CellType.NUMERIC) {
-            return cell.getNumericCellValue();
-        } else if (cell.getCellType() == org.apache.poi.ss.usermodel.CellType.STRING) {
-            try {
-                return Double.parseDouble(cell.getStringCellValue().trim());
-            } catch (NumberFormatException e) {
-                return -1; // Valor inválido
-            }
-        }
-        return -1; // Valor inválido
-    }
-
-    // Método para finalizar a venda
-    private void finalizarVenda() {
-        totalVenda = 0.0;
-        StringBuilder vendaDetalhes = new StringBuilder("Venda finalizada:\n");
-
-        for (Produto p : produtosSelecionados) {
-            if (p.getQuantidade() > 0) {
-                double subtotal = p.getValor() * p.getQuantidade();
-                totalVenda += subtotal;
-                vendaDetalhes.append(p.getNome())
-                        .append(" x")
-                        .append(p.getQuantidade())
-                        .append(" - R$ ")
-                        .append(p.getValor())
-                        .append(" = R$ ")
-                        .append(subtotal)
-                        .append("\n");
-            }
-        }
-        vendaDetalhes.append("Total: R$ ").append(totalVenda).append("\n");
-
-        Toast.makeText(this, vendaDetalhes.toString(), Toast.LENGTH_LONG).show();
-        new RegistrarVendaTask().execute(); // Registrar venda em segundo plano
-    }
-
-    // Método para registrar a venda na planilha em segundo plano
+    // AsyncTask para registrar a venda
     private class RegistrarVendaTask extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Void... voids) {
             try {
-                // Acessando o diretório correto em android/data/com.example.estoquevendas/files/estoquevendas
                 File dir = new File(getExternalFilesDir(null), "estoquevendas");
 
                 if (!dir.exists()) {
-                    dir.mkdirs(); // Criando diretório caso não exista
+                    dir.mkdirs();
                 }
 
-                // Criando ou abrindo o arquivo de registros
                 File file = new File(dir, "registros.xlsx");
                 boolean isNovoArquivo = !file.exists();
 
@@ -195,7 +303,6 @@ public class MercadoActivity extends AppCompatActivity {
                     sheet = workbook.getSheetAt(0);
                 }
 
-                // Adicionando os dados da venda
                 String formasDePagamento = obterFormasDePagamentoSelecionadas();
                 String dataHora = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
 
@@ -216,6 +323,7 @@ public class MercadoActivity extends AppCompatActivity {
                 fos.close();
                 workbook.close();
 
+                atualizarEstoque();
                 return true;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -233,38 +341,17 @@ public class MercadoActivity extends AppCompatActivity {
         }
     }
 
-    // Método para limpar os cliques de produtos
-    private void limparCliques() {
-        for (Produto p : produtosSelecionados) {
-            p.setQuantidade(0);
+    // Método para obter o valor do produto
+    private double obterValorProduto(Cell cell) {
+        if (cell.getCellType() == org.apache.poi.ss.usermodel.CellType.NUMERIC) {
+            return cell.getNumericCellValue();
+        } else if (cell.getCellType() == org.apache.poi.ss.usermodel.CellType.STRING) {
+            try {
+                return Double.parseDouble(cell.getStringCellValue().trim());
+            } catch (NumberFormatException e) {
+                return -1;
+            }
         }
-        atualizarTotalVenda();
-    }
-
-    // Método para atualizar o total da venda
-    private void atualizarTotalVenda() {
-        totalVenda = 0.0;
-        for (Produto p : produtosSelecionados) {
-            totalVenda += p.getQuantidade() * p.getValor();
-        }
-        txtTotalVenda.setText("Total: R$ " + totalVenda);
-    }
-
-    // Método para obter as formas de pagamento selecionadas
-    private String obterFormasDePagamentoSelecionadas() {
-        StringBuilder formasPagamento = new StringBuilder();
-        if (checkboxCredito.isChecked()) {
-            formasPagamento.append("Crédito ");
-        }
-        if (checkboxDebito.isChecked()) {
-            formasPagamento.append("Débito ");
-        }
-        if (checkboxPix.isChecked()) {
-            formasPagamento.append("Pix ");
-        }
-        if (checkboxDinheiro.isChecked()) {
-            formasPagamento.append("Dinheiro ");
-        }
-        return formasPagamento.toString().trim();
+        return -1;
     }
 }

@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Cadastrar Produto"
+            android:text="Cadastrar Produto/Editar"
             android:textSize="18sp"
             android:drawableLeft="@drawable/baseline_add_white_18"
             />
@@ -75,10 +75,10 @@
 
         <!-- Botão com ícone à esquerda (Ícone do Material Design) -->
         <Button
-            android:id="@+id/btnAtualizarPrecoSidebar"
+            android:id="@+id/btnExcluirProduto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Editar Preços"
+            android:text="Excluir Produtos"
             android:textSize="18sp"
             android:drawableLeft="@drawable/baseline_edit_white_18"
             android:layout_marginBottom="10dp"/>

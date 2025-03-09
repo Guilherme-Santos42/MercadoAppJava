@@ -30,7 +30,7 @@
         <activity android:name=".CadastrarProdutoActivity"></activity>
         <activity android:name=".ListaProdutosActivity"></activity>
         <activity android:name=".MercadoActivity"></activity>
-        <activity android:name=".EditarPrecoActivity"></activity>
+        <activity android:name=".ExcluirActivity"></activity>
         <activity android:name=".DescarteProdutoActivity"></activity>
         <activity android:name=".SenhaActivity" />
         <activity android:name=".BestoqueActivity" />

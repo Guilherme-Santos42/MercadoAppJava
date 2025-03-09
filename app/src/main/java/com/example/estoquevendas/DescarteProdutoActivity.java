@@ -7,17 +7,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class DescarteProdutoActivity extends AppCompatActivity {
 
@@ -59,26 +53,12 @@ public class DescarteProdutoActivity extends AppCompatActivity {
             listaProdutos.clear();
 
             for (Row row : sheet) {
-                if (row.getRowNum() == 0) continue; // Pular cabeçalho
+                if (row.getRowNum() == 0) continue;
 
                 if (row.getCell(0) != null && row.getCell(1) != null && row.getCell(2) != null) {
                     String nomeProduto = row.getCell(0).getStringCellValue();
-
-                    // Verifica o tipo da célula antes de ler a quantidade
-                    int quantidadeProduto;
-                    if (row.getCell(1).getCellType() == org.apache.poi.ss.usermodel.CellType.NUMERIC) {
-                        quantidadeProduto = (int) row.getCell(1).getNumericCellValue();
-                    } else {
-                        quantidadeProduto = Integer.parseInt(row.getCell(1).getStringCellValue());
-                    }
-
-                    // Verifica o tipo da célula antes de ler o valor
-                    double valorProduto;
-                    if (row.getCell(2).getCellType() == org.apache.poi.ss.usermodel.CellType.NUMERIC) {
-                        valorProduto = row.getCell(2).getNumericCellValue();
-                    } else {
-                        valorProduto = Double.parseDouble(row.getCell(2).getStringCellValue().replace(",", "."));
-                    }
+                    int quantidadeProduto = (int) row.getCell(1).getNumericCellValue();
+                    double valorProduto = row.getCell(2).getNumericCellValue();
 
                     listaProdutos.add(new Produto(nomeProduto, quantidadeProduto, valorProduto));
                     nomesProdutos.add(nomeProduto);
@@ -96,7 +76,6 @@ public class DescarteProdutoActivity extends AppCompatActivity {
         }
     }
 
-
     private void descartarProduto() {
         String produtoSelecionado = spinnerProdutosDescarte.getSelectedItem().toString();
         String quantidadeStr = edtQuantidadeDescarte.getText().toString();
@@ -113,6 +92,7 @@ public class DescarteProdutoActivity extends AppCompatActivity {
                 if (produto.getQuantidade() >= quantidadeDescarte) {
                     produto.setQuantidade(produto.getQuantidade() - quantidadeDescarte);
                     atualizarQuantidadeNoExcel(produto);
+                    registrarDescarteNoExcel(produtoSelecionado, quantidadeDescarte);
                     Toast.makeText(this, "Produto descartado com sucesso!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "Quantidade insuficiente para descarte!", Toast.LENGTH_SHORT).show();
@@ -152,6 +132,58 @@ public class DescarteProdutoActivity extends AppCompatActivity {
             workbook.close();
         } catch (IOException e) {
             Toast.makeText(this, "Erro ao atualizar o estoque!", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
+    private void registrarDescarteNoExcel(String nomeProduto, int quantidadeDescarte) {
+        try {
+            File file = new File(getExternalFilesDir(null), "estoquevendas/produtos.xlsx");
+            XSSFWorkbook workbook;
+            Sheet sheet;
+
+            if (file.exists()) {
+                FileInputStream fis = new FileInputStream(file);
+                workbook = new XSSFWorkbook(fis);
+                sheet = workbook.getSheet("registro_descarte");
+                if (sheet == null) {
+                    sheet = workbook.createSheet("registro_descarte");
+                    Row header = sheet.createRow(0);
+                    header.createCell(0).setCellValue("Produto");
+                    header.createCell(1).setCellValue("Quantidade");
+                    header.createCell(2).setCellValue("Data");
+                    header.createCell(3).setCellValue("Hora");
+                }
+                fis.close();
+            } else {
+                workbook = new XSSFWorkbook();
+                sheet = workbook.createSheet("registro_descarte");
+                Row header = sheet.createRow(0);
+                header.createCell(0).setCellValue("Produto");
+                header.createCell(1).setCellValue("Quantidade");
+                header.createCell(2).setCellValue("Data");
+                header.createCell(3).setCellValue("Hora");
+            }
+
+            int lastRow = sheet.getLastRowNum() + 1;
+            Row newRow = sheet.createRow(lastRow);
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+            String dataAtual = dateFormat.format(new Date());
+            String horaAtual = timeFormat.format(new Date());
+
+            newRow.createCell(0).setCellValue(nomeProduto);
+            newRow.createCell(1).setCellValue(quantidadeDescarte);
+            newRow.createCell(2).setCellValue(dataAtual);
+            newRow.createCell(3).setCellValue(horaAtual);
+
+            FileOutputStream fos = new FileOutputStream(file);
+            workbook.write(fos);
+            fos.close();
+            workbook.close();
+        } catch (IOException e) {
+            Toast.makeText(this, "Erro ao registrar descarte!", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }

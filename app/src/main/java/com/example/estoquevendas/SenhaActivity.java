@@ -39,8 +39,8 @@ public class SenhaActivity extends AppCompatActivity {
                 } else if ("DescarteProduto".equals(proximaActivity)) {
                     Intent intent = new Intent(SenhaActivity.this, DescarteProdutoActivity.class);
                     startActivity(intent);
-                } else if ("EditarPrecoActivity".equals(proximaActivity)) {
-                    Intent intent = new Intent(SenhaActivity.this, EditarPrecoActivity.class);
+                } else if ("ExcluirActivity".equals(proximaActivity)) {
+                    Intent intent = new Intent(SenhaActivity.this, ExcluirActivity.class);
                     startActivity(intent);
                 } else if ("RegistrosActivity".equals(proximaActivity)) {
                     Intent intent = new Intent(SenhaActivity.this, RegistrosActivity.class);

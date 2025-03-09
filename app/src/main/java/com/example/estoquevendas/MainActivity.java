@@ -12,7 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 public class MainActivity extends AppCompatActivity {
 
     // Referências aos botões da Sidebar
-    Button btnCadastrarProdutoSidebar, btnListaProdutoSidebar, btnRegistro_lista, btnMercadoSidebar, btnDescarteProdutoSidebar,btnEstoqueBaixo,btnAtualizarPrecoSidebar;
+    Button btnCadastrarProdutoSidebar, btnListaProdutoSidebar, btnRegistro_lista, btnMercadoSidebar, btnDescarteProdutoSidebar,btnEstoqueBaixo, btnExcluirProduto;
     DrawerLayout drawerLayout;
 
     @Override
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         btnCadastrarProdutoSidebar = findViewById(R.id.btnCadastrarProdutoSidebar);
         btnListaProdutoSidebar = findViewById(R.id.btnListaProdutoSidebar);
         btnMercadoSidebar = findViewById(R.id.btnMercadoSidebar);
-        btnAtualizarPrecoSidebar = findViewById(R.id.btnAtualizarPrecoSidebar);
+        btnExcluirProduto = findViewById(R.id.btnExcluirProduto);
         btnDescarteProdutoSidebar = findViewById(R.id.btnDescarteProdutoSidebar);
         btnEstoqueBaixo =findViewById(R.id.btnEstoqueBaixo);
         btnRegistro_lista=findViewById(R.id.btnRegistro_lista);
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 R.string.drawer_open, R.string.drawer_close);
 
         drawerLayout.addDrawerListener(toggle);
-        getSupportActionBar().setTitle("Bemvindo Salgados");
+        getSupportActionBar().setTitle("Master Estoque");
 
         toggle.syncState();
 
@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        btnAtualizarPrecoSidebar.setOnClickListener(v -> {
+        btnExcluirProduto.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SenhaActivity.class);
-            intent.putExtra("proximaActivity", "EditarPrecoActivity");
+            intent.putExtra("proximaActivity", "ExcluirActivity");
             startActivity(intent);
         });
 
