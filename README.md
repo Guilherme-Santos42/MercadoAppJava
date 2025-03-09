@@ -3,7 +3,9 @@
 
 
 <h2> Side Bar aberta</h2>
-<img src="https://github.com/user-attachments/assets/a00ab2ab-4077-4806-91ce-c34b222f8be8">
+<img src="https://github.com/user-attachments/assets/35acb2b3-05a9-475d-a8d2-b6022309f153">
+
+
 <h2> Funções: </h2>
 <h2> Cadastro de produtos:</h2>
 <h3> Ao acessar é necessário uma senha:</h3>
