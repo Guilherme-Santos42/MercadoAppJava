@@ -1,5 +1,7 @@
 <h1> APP Mercado, Menu principal, com ToolBar: </h1>
-<img src="https://github.com/user-attachments/assets/3f1dd958-589c-4f0e-a087-b364458543bf">
+<img src="https://github.com/user-attachments/assets/ace940bf-31e6-43d8-ab32-000d09a85759">
+
+
 <h2> Side Bar aberta</h2>
 <img src="https://github.com/user-attachments/assets/a00ab2ab-4077-4806-91ce-c34b222f8be8">
 <h2> Funções: </h2>
